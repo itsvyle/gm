@@ -33,11 +33,20 @@
 ## gm.request
 GET Request:
 ```javascript
-//A normal get request
+//A normal GET request
 request("https://www.example.com",null,function (r) {
   if (r.status !== 1) { /*There was an error in making the web request*/
-    
+    console.error(r.error);
     return;
   }
+  console.log(r.res);
+});
+//A GET request with a json format return
+request("https://www.example.com/example.json",{json: true},function (r) {
+  if (r.status !== 1) { /*There was an error in making the web request OR the request return was unreadable JSON*/
+    console.error(r.error);
+    return;
+  }
+  console.log(r.res);
 });
 ```
