@@ -291,7 +291,7 @@ window.addEventListener("load",gm.onDocLoad);
 					m.remove();
 					if (timer) {
 						clearTimeout(timer);
-						 (!!timebarTimer) {clearInterval(timebarTimer);}
+						if (!!timebarTimer) {clearInterval(timebarTimer);}
 					}
 				};
 				m.title = "Close";
