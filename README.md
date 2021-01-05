@@ -30,7 +30,7 @@
 * **`copyText(text : string) : void`**: Copies text to the clipboard.
 * **`changeURL(url : string,[title : string]) : void`**: Changes the url that is shown in the url bar of the client. Title is purely optionnal, made to go in the browser history
 * **`UTCTime([date : Date = new Date()]) : number`**: Gets the UTC timestamp for a `date`.
-* **`multilineTextArea(textarea : HTML Textarea,[minheight_ : number = textarea.clientHeight,[submit : function]],`**: 
+* **`multilineTextArea(textarea : HTML Textarea,[minheight_ : number = textarea.clientHeight,[submit : function]],`**: Lets a textarea become multiline. If the user presses shift and enter at the same time, it will create a new line. `submit`, if provided, will be called when the user presses enter and submits his entry.
 
 ## gm.request(url : string,[options : object = {}],callback : function)
 GET Request:
