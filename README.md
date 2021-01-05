@@ -30,7 +30,7 @@
 * **`copyText(text : string)`**: Copies text to the clipboard.
 
 
-## gm.request
+## gm.request(url : string,[options : object = {}],callback : function)
 GET Request:
 ```javascript
 //A normal GET request
