@@ -3,5 +3,14 @@
 * **It permits the creation of short code blocks to make simple animations or interactivity.**
 * **It should be compatible with most versions of javascript, even the older ones**
 
+##Importation
+**Import from GitHub**
+---
+```html
+
+```
+
 ## Functions
 *Add `gm.` in front of every one of those*
+* `formatNumber(n : number) : string`: formats the number n into a more readable string. (Example: 1234 = "1'234")
+* 
