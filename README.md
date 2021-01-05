@@ -10,10 +10,12 @@
 <html>
   <head>
     <title>GM !</title>
-    <script src="" type="application/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://raw.githubusercontent.com/itsvyle/gm/main/gm.js" type="application/javascript"></script>
+    <link href="https://raw.githubusercontent.com/itsvyle/gm/main/gm.css" rel="stylesheet">
   </head>
   <body>
-    
+    <!--put whatever code here-->
   </body>
 </html>
 ```
