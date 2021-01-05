@@ -49,3 +49,8 @@ request("https://www.example.com/example.json",{json: true},function (r) {
   console.log(r.res);
 });
 ```
+
+POST Request:
+```javascript
+
+```
