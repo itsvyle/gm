@@ -52,5 +52,16 @@ request("https://www.example.com/example.json",{json: true},function (r) {
 
 POST Request:
 ```javascript
-
+//A simple POST request with a json return. We will be sending login credentials
+request("/login",{
+  json: true,
+  method: "POST",
+  body: "username=user&password=pwd"
+},function (r) {
+  if (r.status !== 1) { /*There was an error in making the web request OR the request return was unreadable JSON*/
+    console.error(r.error);
+    return;
+  }
+  console.log(r);
+});
 ```
