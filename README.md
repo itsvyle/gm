@@ -23,4 +23,5 @@
 ## Functions
 *Add `gm.` in front of every one of those*
 * `formatNumber(n : number) : string`: formats the number n into a more readable string. (Example: 1234 = "1'234")
-* 
+* `validateOptions(options : object,defaults : object,[required : array]) : boolean|string`: Checks the validity of an object. It will merge it with the defaults and check the required fields in the object.
+* `
