@@ -95,6 +95,5 @@ modal.navigateHTML('<h1>This is in a modal !</h1>',true); //Opens this html docu
 ```javascript
 //But it can also be done this way:
 var modal = new gm.Modal();
-modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true); //We can merge both the commands on the same 
-//line as each function returns the modal object
+modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true); //We can merge both the commands on the same line as each function returns the modal object
 ```
