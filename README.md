@@ -127,3 +127,12 @@ if (request.isSuccessfull) {
   not.addMessage("Error getting data. Please reload page","background-color: red;",false,false); //Notification has a red background, and cannot be closed in any way
 }
 ```
+
+## ContextMenu
+A context menu is a very usefull tool to add options to a website
+
+**Reference**:
+* **constructor([menuType : number = 1]) : void**: Creates the context menu, but it is still invisible. `menuType` is the style type of the menu. For now, there are only two types of menus (`1` and `2`)
+* **contextMenu(event : HTML Event,items : Array\<objects\>)**: Opens the context menu with the specified items (see structure later). THIS FUNCTION MUST BE TRIGGERED BY AN HTML EVENT.
+* **close()**: Closes the context menu
+* **fullContext(element : HTML Node,items : Array\<objects\>,events : Array<string>|string)**: 
