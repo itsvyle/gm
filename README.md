@@ -3,7 +3,7 @@
 * **It permits the creation of short code blocks to make simple animations or interactivity.**
 * **It should be compatible with most versions of javascript, even the older ones**
 
-##Importation
+## Importation
 **Import from GitHub**
 ---
 ```html
