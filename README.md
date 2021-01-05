@@ -68,3 +68,18 @@ request("/login",{
   console.log(r);
 });
 ```
+
+# Classes
+This library also provides classes, most notably for visualization / interactivity on the client view
+
+## Modal
+Creates a modal that can be shown in front of other data to the user
+**Reference:**
+* **constructor([addIframe : boolean = false]) : void**: The constructor of the class. If `addIframe === true`, there will be an iframe in the modal to show data
+* **append() : void**: Appends the iframe to the document body
+* **open() : void**: Opens the modal
+* **close([clb : function]) : void**: Closes/Hides the modal
+
+```javascript
+var modal = new g
+```
