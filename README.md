@@ -2,7 +2,7 @@
 * **GM is a javascript browser library created by me (`@itsvyle`) to facilitate the use of javascript in browser.**
 * **It permits the creation of short code blocks to make simple animations or interactivity.**
 * **It should be compatible with most versions of javascript, even the older ones**
-
+* **IMPORTANT: Most of the functions need the `gm.css` file to be imported as well**
 ## Importation
 **Import from GitHub**
 ```html
@@ -104,4 +104,9 @@ modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true)
 Creates a support for messages to display in the bottom left of the screen
 
 **Reference**:
-
+* **contructor([style : string = ""])**: Creates the class and appends the notifications container to body. `style` is the extra style for the container, for example if you wish to change it's position on screen
+* **addMessage(message : string,[style : string = "",[timeout : number = false,[closeOnClick : boolean = false]]]) : HTML Div**: Creates a new notification. Arguments are:
+  * `message`: (required) The text content of the notification
+  * `style`: (optionnal) The extra style for the notification, for example color or background. Must be valid CSS (view example)
+  * `timeout`: (optionnal) The time that it will take for the notification to hide. If not provided, the notification will stay visible until it is manually removed.
+  * `closeOnClick`: (optionnal) Whethever or not the user is able to close the notification by clicking on it
