@@ -76,14 +76,22 @@ This library also provides classes, most notably for visualization / interactivi
 Creates a modal that can be shown in front of other data to the user
 **Reference:**
 * **constructor([className : string = "__modal-full-screen"]) : void**: The constructor of the class. `className` is the "type" of the modal. For now, the only two options are `__modal-full-screen` and `__modal-margins`.
-* **createIframe() : void**: Creates and iframe in the modal to show data.
-* **append() : void**: Appends the iframe to the document body.
-* **open() : void**: Opens the modal.
+* **createIframe() : self**: Creates and iframe in the modal to show data. Returns self
+* **append() : self**: Appends the iframe to the document body. Returns self.
+* **open([showCloseButton : boolean = true]) : void**: Opens the modal.
 * **close([clb : function]) : void**: Closes/Hides the modal.
 If iframe was created:
-* **navigate(url : string) : void**: Navigates to a certain url and opens the modal.
-* **navigateHTML(html : string,[addBaseHTML : boolean = false]) : void**: Navigates to and `html` document. `addBaseHTML` is whether or not the base html tags such as `<body>` or `<head>` should be added automatically.
+* **navigate(url : string) : self**: Navigates to a certain url and opens the modal. Returns self.
+* **navigateHTML(html : string,[addBaseHTML : boolean = false]) : self**: Navigates to and `html` document. `addBaseHTML` is whether or not the base html tags such as `<body>` or `<head>` should be added automatically. Returns self.
 
 ```javascript
-var modal = new gm.Modal(
+var modal = new gm.Modal(); //Creates a full-screen modal
+modal.createIframe(); //Creates the iframe in the modal
+modal.append(); //Appends the modal to the document body
+```
+
+```javascript
+//But it can also be done this way:
+var modal = new gm.Modal();
+modal.createIframe().append(); //We can merge both the commands on the same line as each function returns the modal object
 ```
