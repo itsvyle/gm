@@ -79,7 +79,7 @@ var gm = {
 		}
 		return ob;
 	},
-	_importAsset(o) {
+	_importAsset: function(o) {
 		gm[o.key] = o.value;
 	}
 
@@ -291,7 +291,7 @@ window.addEventListener("load",gm.onDocLoad);
 					m.remove();
 					if (timer) {
 						clearTimeout(timer);
-						if (!!timebarTimer) {clearInterval(timebarTimer);}
+						 if (!!timebarTimer) {clearInterval(timebarTimer);}
 					}
 				};
 				m.title = "Close";
@@ -456,6 +456,10 @@ window.addEventListener("load",gm.onDocLoad);
         var now = new Date(d1.getUTCFullYear(),d1.getUTCMonth(),d1.getUTCDate(),d1.getUTCHours(),d1.getUTCMinutes(),d1.getUTCSeconds(),d1.getUTCMilliseconds());
         return now.getTime();
 	};
+	
+	gm.JSONParse = function (s) {
+		try {return JSON.parse(s);} catch (err) {return null;}
+	}
 	
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
