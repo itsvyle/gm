@@ -5,7 +5,6 @@
 
 ## Importation
 **Import from GitHub**
----
 ```html
 <html>
   <head>
