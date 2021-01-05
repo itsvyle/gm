@@ -3,3 +3,5 @@
 * **It permits the creation of short code blocks to make simple animations or interactivity.**
 * **It should be compatible with most versions of javascript, even the older ones**
 
+## Functions
+*Add `gm.` in front of every one of those*
