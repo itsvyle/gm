@@ -284,20 +284,21 @@ window.addEventListener("load",gm.onDocLoad);
 				innerText: message
 			});
 			var timer = null;
+			var timebarTimer = null;
 			if (closeOnClick === true) {
 				m.className += " __notification-message-clickable";
 				m.onclick = function (e) {
 					m.remove();
 					if (timer) {
 						clearTimeout(timer);
+						 (!!timebarTimer) {clearInterval(timebarTimer);}
 					}
 				};
 				m.title = "Close";
 			}
 
 			this.container.appendChild(m);
-			if (timeout !== false) {
-				var timebarTimer = null;
+			if (timeout !== false) {				
 				var left = timeout;
 				if (this.showTimeBar === true) {
 					setTimeout(function () {
