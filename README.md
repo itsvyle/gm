@@ -20,11 +20,24 @@
 </html>
 ```
 
-## Functions
+# Functions
 *Add `gm.` in front of every one of those*
 
 * **`onload(clb : function)`**: Clb will be called on the html document load
 * **`newItem(nodeName : string,[options : object,[parent : node]]) : node`**: Creates a new HTML node. All the `options` will be assigned to the object, and the object will be appended to `parent` (if provided). Returns the created node
-* **`request(url : string,[options : object],callback : function`**:
+* **`request(url : string,[options : object = {}],callback : function) : void`**: Makes a webrequest (XMLHttp) to the `url`. See the explications by scrolling down.
 * **`formatNumber(n : number) : string`**: formats the number `n` into a more readable string. (Example: 1234 = "1'234")
 * **`validateOptions(obj : object,defaults : object,[required : array]) : boolean|string`**: Checks the validity of an object (`obj`). It will merge it with the defaults and check the required fields in the object.
+
+
+## gm.request
+GET Request:
+```javascript
+//A normal get request
+request("https://www.example.com",null,function (r) {
+  if (r.status !== 1) { /*There was an error in making the web request*/
+    
+    return;
+  }
+});
+```
