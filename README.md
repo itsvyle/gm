@@ -107,6 +107,23 @@ Creates a support for messages to display in the bottom left of the screen
 * **contructor([style : string = ""])**: Creates the class and appends the notifications container to body. `style` is the extra style for the container, for example if you wish to change it's position on screen
 * **addMessage(message : string,[style : string = "",[timeout : number = false,[closeOnClick : boolean = false]]]) : HTML Div**: Creates a new notification. Arguments are:
   * `message`: (required) The text content of the notification
-  * `style`: (optionnal) The extra style for the notification, for example color or background. Must be valid CSS (view example)
-  * `timeout`: (optionnal) The time that it will take for the notification to hide. If not provided, the notification will stay visible until it is manually removed.
-  * `closeOnClick`: (optionnal) Whethever or not the user is able to close the notification by clicking on it
+  * `style`: (optionnal) The extra style for the notification, for example color or background. Must be valid CSS (view example). By default, `background-color` is green and `color` is white.
+  * `timeout`: (optionnal) The time that it will take for the notification to hide (in milliseconds). If not provided, the notification will stay visible until it is manually removed.
+  * `closeOnClick`: (optionnal) Whethever or not the user is able to close the notification by clicking on it.
+* (property) `showTimeBar : boolean = true`: This defines whether or not a timebar should be shown on messages with timeout to show the time that is left before it dissapears
+
+```javascript
+var not = new gm.NotificationMessages(); //Create the object
+```
+First, I will send a notification warning the user that the page is loaded. It will dissapear after 2 seconds and user will not be able to remove it by clicking
+```javascript
+not.addMessage("The page is loaded !",null,2000,true);
+```
+Then, imagine I make a web request. If the response is successfull, I will tell the user "Success getting data". If not, the I will ask the user to reload his page to try again
+```javascript
+if (request.isSuccessfull) {
+  not.addMessage("Success getting the data",null,2500,true); //Notification will dissapear after 2.5 seconds, but he can close it faster by clicking on it
+} else {
+  not.addMessage("Error getting data. Please reload page","background-color: red;",false,false); //Notification has a red background, and cannot be closed in any way
+}
+```
