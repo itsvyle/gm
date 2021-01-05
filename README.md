@@ -99,3 +99,4 @@ modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true)
 ```
 
 ## NotificationMessages
+Creates a support for messages to display in the bottom left of the screen
