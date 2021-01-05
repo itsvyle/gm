@@ -84,6 +84,8 @@ If iframe was created:
 * **navigate(url : string) : self**: Navigates to a certain url and opens the modal. Returns self.
 * **navigateHTML(html : string,[addBaseHTML : boolean = false]) : self**: Navigates to and `html` document. `addBaseHTML` is whether or not the base html tags such as `<body>` or `<head>` should be added automatically. Returns self.
 
+You can also access the modal and the iframe by respectivly using `<modal>.modal` and `<modal>.iframe`.
+
 ```javascript
 var modal = new gm.Modal(); //Creates a full-screen modal
 modal.createIframe(); //Creates the iframe in the modal
@@ -100,3 +102,6 @@ modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true)
 
 ## NotificationMessages
 Creates a support for messages to display in the bottom left of the screen
+
+**Reference**:
+
