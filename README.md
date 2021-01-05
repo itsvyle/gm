@@ -27,10 +27,10 @@
 * **`request(url : string,[options : object = {}],callback : function) : void`**: Makes a webrequest (XMLHttp) to the `url`. See the explications by scrolling down.
 * **`formatNumber(n : number) : string`**: formats the number `n` into a more readable string. (Example: 1234 = "1'234")
 * **`validateOptions(obj : object,defaults : object,[required : array]) : boolean|string`**: Checks the validity of an object (`obj`). It will merge it with the defaults and check the required fields in the object.
-* **`copyText(text : string)`**: Copies text to the clipboard.
-* **`changeURL(url : string,[title : string])`**: Changes the url that is shown in the url bar of the client. Title is purely optionnal, made to go in the browser history
-* **`UTCTime([date : Date = new Date()])`**: Gets the UTC timestamp for a `date`.
-
+* **`copyText(text : string) : void`**: Copies text to the clipboard.
+* **`changeURL(url : string,[title : string]) : void`**: Changes the url that is shown in the url bar of the client. Title is purely optionnal, made to go in the browser history
+* **`UTCTime([date : Date = new Date()]) : number`**: Gets the UTC timestamp for a `date`.
+* **`multilineTextArea(textarea : HTML Textarea,[minheight_ : number = textarea.clientHeight,[submit : function]],`**: 
 
 ## gm.request(url : string,[options : object = {}],callback : function)
 GET Request:
