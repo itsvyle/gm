@@ -7,7 +7,15 @@
 **Import from GitHub**
 ---
 ```html
-
+<html>
+  <head>
+    <title>GM !</title>
+    <script src="" type="application/javascript"></script>
+  </head>
+  <body>
+    
+  </body>
+</html>
 ```
 
 ## Functions
