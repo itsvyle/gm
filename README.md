@@ -22,13 +22,13 @@
 # Functions
 *Add `gm.` in front of every one of those*
 
-* **`onload(clb : function)`**: Clb will be called on the html document load
-* **`newItem(nodeName : string,[options : object,[parent : node]]) : node`**: Creates a new HTML node. All the `options` will be assigned to the object, and the object will be appended to `parent` (if provided). Returns the created node
+* **`onload(clb : function)`**: Clb will be called on the html document load.
+* **`newItem(nodeName : string,[options : object,[parent : node]]) : node`**: Creates a new HTML node. All the `options` will be assigned to the object, and the object will be appended to `parent` (if provided). Returns the created node.
 * **`request(url : string,[options : object = {}],callback : function) : void`**: Makes a webrequest (XMLHttp) to the `url`. See the explications by scrolling down.
-* **`formatNumber(n : number) : string`**: formats the number `n` into a more readable string. (Example: 1234 = "1'234")
+* **`formatNumber(n : number) : string`**: formats the number `n` into a more readable string. (Example: 1234 = "1'234").
 * **`validateOptions(obj : object,defaults : object,[required : array]) : boolean|string`**: Checks the validity of an object (`obj`). It will merge it with the defaults and check the required fields in the object.
 * **`copyText(text : string) : void`**: Copies text to the clipboard.
-* **`changeURL(url : string,[title : string]) : void`**: Changes the url that is shown in the url bar of the client. Title is purely optionnal, made to go in the browser history
+* **`changeURL(url : string,[title : string]) : void`**: Changes the url that is shown in the url bar of the client. Title is purely optionnal, made to go in the browser history.
 * **`UTCTime([date : Date = new Date()]) : number`**: Gets the UTC timestamp for a `date`.
 * **`multilineTextArea(textarea : HTML Textarea,[minheight_ : number = textarea.clientHeight,[submit : function]],`**: Lets a textarea become multiline. If the user presses shift and enter at the same time, it will create a new line. `submit`, if provided, will be called when the user presses enter and submits his entry.
 
@@ -70,16 +70,20 @@ request("/login",{
 ```
 
 # Classes
-This library also provides classes, most notably for visualization / interactivity on the client view
+This library also provides classes, most notably for visualization / interactivity on the client view.
 
 ## Modal
 Creates a modal that can be shown in front of other data to the user
 **Reference:**
-* **constructor([addIframe : boolean = false]) : void**: The constructor of the class. If `addIframe === true`, there will be an iframe in the modal to show data
-* **append() : void**: Appends the iframe to the document body
-* **open() : void**: Opens the modal
-* **close([clb : function]) : void**: Closes/Hides the modal
+* **constructor([className : string = "__modal-full-screen"]) : void**: The constructor of the class. `className` is the "type" of the modal. For now, the only two options are `__modal-full-screen` and `__modal-margins`.
+* **createIframe() : void**: Creates and iframe in the modal to show data.
+* **append() : void**: Appends the iframe to the document body.
+* **open() : void**: Opens the modal.
+* **close([clb : function]) : void**: Closes/Hides the modal.
+If iframe was created:
+* **navigate(url : string) : void**: Navigates to a certain url and opens the modal.
+* **navigateHTML(html : string,[addBaseHTML : boolean = false]) : void**: Navigates to and `html` document. `addBaseHTML` is whether or not the base html tags such as `<body>` or `<head>` should be added automatically.
 
 ```javascript
-var modal = new g
+var modal = new gm.Modal(
 ```
