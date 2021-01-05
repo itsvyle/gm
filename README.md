@@ -133,6 +133,28 @@ A context menu is a very usefull tool to add options to a website
 
 **Reference**:
 * **constructor([menuType : number = 1]) : void**: Creates the context menu, but it is still invisible. `menuType` is the style type of the menu. For now, there are only two types of menus (`1` and `2`)
-* **contextMenu(event : HTML Event,items : Array\<objects\>)**: Opens the context menu with the specified items (see structure later). THIS FUNCTION MUST BE TRIGGERED BY AN HTML EVENT.
+* **contextMenu(event : HTML Event,items : Array\<object\>)**: Opens the context menu with the items to show in the context menu (see structure later). THIS FUNCTION MUST BE TRIGGERED BY AN HTML EVENT.
 * **close()**: Closes the context menu
-* **fullContext(element : HTML Node,items : Array\<objects\>,events : Array<string>|string)**: 
+* **fullContext(element : HTML Node,items : Array\<object\>,events : Array\<string\>|string)**: This function is made to easily add the context menu on any item.`element` is the item that will be the trigger for opening context menu. `items` is an array of items to show in the context menu (see structure later). `events` is the event(s) to listen for on the `element` to show the context menu. For example, I might want the context menu to show not only on a right-click but also on a left-click.
+
+**Items structure**:
+The items are the fields that will be shown inside the context menu.
+It must be an array, with items of one of the following formats:
+**Button**:
+```javascript
+var items = [
+  {
+    label: "A context menu item", //What will be shown in the menu item
+    onclick: function (event) {
+      alert("Item clicked !");
+    }, //Function that will be triggered when the user clicks the options
+    title: "This is the item's title" //(optionnal) what will show when the user hovers over the item
+  }
+];
+```
+**Separator**:
+```javascript
+var items = [
+  {type: "separator"}
+];
+```
