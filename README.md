@@ -88,11 +88,13 @@ If iframe was created:
 var modal = new gm.Modal(); //Creates a full-screen modal
 modal.createIframe(); //Creates the iframe in the modal
 modal.append(); //Appends the modal to the document body
-modal.navigateHTML('<h1>This is in a modal !</h1>',true); //Opens this html document in the iframe. As the base html tags aren't in the html, set second parameter to 'true' and the base tags will be added
+modal.navigateHTML('<h1>This is in a modal !</h1>',true); //Opens this html document in the iframe. 
+//As the base html tags aren't in the html, set second parameter to 'true' and the base tags will be added
 ```
 
 ```javascript
 //But it can also be done this way:
 var modal = new gm.Modal();
-modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true); //We can merge both the commands on the same line as each function returns the modal object
+modal.createIframe().append().navigateHTML('<h1>This is in a modal !</h1>',true); //We can merge both the commands on the same 
+//line as each function returns the modal object
 ```
