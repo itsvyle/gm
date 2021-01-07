@@ -231,3 +231,12 @@ For a css class that will be used directly by the dev, use a double-dash (--) in
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+.--bold {
+    font-weight: bold;
+}
+
+.--underlined {
+    text-decoration: underline;
+}
