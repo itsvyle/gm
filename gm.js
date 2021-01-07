@@ -123,7 +123,15 @@ window.addEventListener("load",gm.onDocLoad);
 		if (typeof(opts) == "function") {callback = opts;opts = {};} else if (!opts) {
 			opts = {};
 		}
-		
+		if (typeof(opts.headers) != "object") {
+            opts.headers = {
+                "content-type": "application/x-www-form-urlencoded"
+            };
+        } else {
+            if (!opts.headers['content-type']) {
+                opts.headers['content-type'] = "application/x-www-form-urlencoded";
+            }
+        }
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
@@ -155,6 +163,10 @@ window.addEventListener("load",gm.onDocLoad);
 			callback({status: 0,error_level: 2,error: "Error making request"});
 			return xhttp.abort();
 		};
+
+        for(var h in opts.headers) {
+            xmhttp.setRequestHeader(h,opts.header[h]);
+        }
 
 		if (opts.method == "GET" || !opts.method) {
 			xhttp.open("GET", url, true);
