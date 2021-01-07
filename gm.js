@@ -133,7 +133,7 @@ window.addEventListener("load",gm.onDocLoad);
 				if (this.status != 200) {
 					r.status = 0;
 					r.error_level = 1;
-					r.error = "Error making request(" + String(this.status) + ": " + this.statusText + ")";
+					r.error = "Error making request(" + String(this.status) + ": " + this.responseText + ")";
 				} else {
 					r.status = 1;
 					if (opts.json === true) {
