@@ -10,3 +10,19 @@ File for tables
 tr.--no-stretches td, tr.--no-stretches th {
 	width: 1px;
 }
+
+.--table-borders {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.--table-borders td,.--table-borders th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.--table-borders tr:nth-child(even) {
+    backgrounld-color: #dddddd;
+}
