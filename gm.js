@@ -463,7 +463,7 @@ window.addEventListener("load",gm.onDocLoad);
 	
 	gm.parseInt = function (s) {
 		var r = parseInt(s);
-		if (r == NaN) {return null;}
+		if (isNaN(r)) {return null;}
 		return r;
 	};
 	
