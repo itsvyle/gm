@@ -7,7 +7,7 @@ File for tables
 	height: 100%;
 }
 
-tr.--no-stretches td, tr.--no-stretches th {
+tr.--no-stretches td:not(.stretch), tr.--no-stretches th:not(.stretch) {
 	width: 1px;
 }
 
