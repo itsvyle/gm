@@ -132,7 +132,14 @@ window.addEventListener("load",gm.onDocLoad);
                 opts.headers['content-type'] = "application/x-www-form-urlencoded";
             }
         }
-		var xhttp = new XMLHttpRequest();
+		var xhttp
+		if (window.XMLHttpRequest) {
+		   // code for modern browsers
+		   xhttp = new XMLHttpRequest();
+		 } else {
+		   // code for old IE browsers
+		   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				// && this.status == 200
