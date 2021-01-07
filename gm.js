@@ -459,7 +459,13 @@ window.addEventListener("load",gm.onDocLoad);
 	
 	gm.JSONParse = function (s) {
 		try {return JSON.parse(s);} catch (err) {return null;}
-	}
+	};
+	
+	gm.parseInt = function (s) {
+		var r = parseInt(s);
+		if (r == NaN) {return null;}
+		return r;
+	};
 	
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
