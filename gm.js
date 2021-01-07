@@ -171,16 +171,17 @@ window.addEventListener("load",gm.onDocLoad);
 			return xhttp.abort();
 		};
 
-        for(var h in opts.headers) {
-            xhttp.setRequestHeader(h,opts.headers[h]);
-        }
-
 		if (opts.method == "GET" || !opts.method) {
 			xhttp.open("GET", url, true);
 		} else if (opts.method == "POST") {
 			xhttp.open("POST", url, true);
 		}
+			
+		for(var h in opts.headers) {
+            xhttp.setRequestHeader(h,opts.headers[h]);
+        }
 
+		
 		if (opts.body) {
 			xhttp.send(opts.body);
 		} else {
