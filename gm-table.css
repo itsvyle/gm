@@ -9,6 +9,7 @@ File for tables
 
 tr.--no-stretches td:not(.stretch), tr.--no-stretches th:not(.stretch) {
 	width: 1px;
+    white-space: nowrap;
 }
 
 .--table-borders {
