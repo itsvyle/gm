@@ -172,7 +172,7 @@ window.addEventListener("load",gm.onDocLoad);
 		};
 
         for(var h in opts.headers) {
-            xmhttp.setRequestHeader(h,opts.header[h]);
+            xhttp.setRequestHeader(h,opts.header[h]);
         }
 
 		if (opts.method == "GET" || !opts.method) {
