@@ -487,6 +487,44 @@ window.addEventListener("load",gm.onDocLoad);
 		return r;
 	};
 	
+	gm.randomString = function (length) {
+	   var result = '';
+	   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	   var charactersLength = characters.length;
+	   for ( var i = 0; i < length; i++ ) {
+		  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	   }
+	   return result;
+	};
+	
+	gm.setCookie = function(cname, cvalue, exdays) {
+		var expires = "";
+		if (exdays != null) {
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+			var expires = ";expires="+ d.toUTCString();
+		}
+	  document.cookie = cname + "=" + cvalue + expires + ";path=/";
+	};
+	
+	gm.getCookie = function(cname) {
+	  var name = cname + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+		  c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+		  return c.substring(name.length, c.length);
+		}
+	  }
+	  return "";
+	};
+
+
+	
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
