@@ -7,9 +7,8 @@ File for tables
 	height: 100%;
 }
 
-tr.--no-stretches td:not(.stretch), tr.--no-stretches th:not(.stretch) {
+tr.--no-stretches td, tr.--no-stretches th {
 	width: 1px;
-    white-space: nowrap;
 }
 
 .--table-borders {

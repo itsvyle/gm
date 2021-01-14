@@ -132,6 +132,7 @@ For a css class that will be used directly by the dev, use a double-dash (--) in
 	opacity: 1;
 	transform: scale(1);
 	transform-origin: top left;
+	display: block;
 }
 
 .__context-menu-1 {
@@ -156,10 +157,12 @@ For a css class that will be used directly by the dev, use a double-dash (--) in
 	cursor: pointer;
 	/* color: #666; */
 }
+.__context-menu .__context-menu-li-disabled {
+	cursor: no-drop;
+}
 
-.__context-menu-1 .__context-menu-li:hover {
+.__context-menu-1 .__context-menu-li:hover:not(.__context-menu-li-disabled) {
 	background-color: #eee;
-	cursor: pointer;
 }
 
 .__context-menu-1 .__context-menu-sep, .__context-menu-2 .__context-menu-sep {
@@ -199,12 +202,10 @@ For a css class that will be used directly by the dev, use a double-dash (--) in
 	border-top: 2px #2C2F33 solid;
 }
 
-.__context-menu-2 .__context-menu-li:hover {
+.__context-menu-2 .__context-menu-li:hover:not(.__context-menu-li-disabled) {
 	background-color: #767b82;
 	cursor: pointer;
 }
-
-
 
 /*======================================================
 ================== LOADING ================
@@ -232,11 +233,21 @@ For a css class that will be used directly by the dev, use a double-dash (--) in
   100% { transform: rotate(360deg); }
 }
 
-
-.--bold {
-    font-weight: bold;
+/*======================================================
+================== UTILITY ================
+=======================================================*/
+.--bold {font-weight: bold;}
+.--underlined {text-decoration: underline;}
+/*======================================================
+================== PROGRESS BAR ================
+=======================================================*/
+.__progress-bar-container-1 {
+	background-color: #f1f1f1!important;
 }
 
-.--underlined {
-    text-decoration: underline;
+.__progress-bar-container-1 div {
+	height: 40px;
+    width: 0%;
+    text-align: center;
+    font-size: 25px;
 }
