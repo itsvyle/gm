@@ -607,6 +607,22 @@ window.addEventListener("load",gm.onDocLoad);
          .replace(/'/g, "&#039;");
 	};
 	
+	gm.buildQuery = function (args) {
+		if (!args || typeof(args) != "object") {return "";}
+		var ret = "";var v;
+		for(var n in args) {
+			v = args[n];
+			if (v === null || v === undefined) {continue;}
+			if (typeof(v) == "object" || Array.isArray(v)) {v = JSON.stringify(v);}
+			if (typeof(v) == "number") {v = String(v);}
+			if (typeof(v) == "boolean") {if (v === true) {v = "1";} else {v = "0";}}
+			v = encodeURIComponent(v);
+			if (ret != "") {ret += "&";}
+			ret += n + "=" + v;
+		}
+		return ret;
+	};
+	
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
