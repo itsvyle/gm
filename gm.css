@@ -236,8 +236,8 @@ For a css class that will be used directly by the dev, use a double-dash (--) in
 /*======================================================
 ================== UTILITY ================
 =======================================================*/
-.--bold {font-weight: bold;}
-.--underlined {text-decoration: underline;}
+.-bold {font-weight: bold;}
+.-underlined {text-decoration: underline;}
 /*======================================================
 ================== PROGRESS BAR ================
 =======================================================*/
