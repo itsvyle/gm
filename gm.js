@@ -35,54 +35,6 @@
 		return this.indexOf(searchString, position) === position;
 	  };
 	}
-	// =========================== NODE CHILD ELEMENT COUNT ===========================
-	(function(constructor) {
-	  if (constructor &&
-		  constructor.prototype &&
-		  constructor.prototype.childElementCount == null) {
-		Object.defineProperty(constructor.prototype, 'childElementCount', {
-		  get: function() {
-			var i = 0, count = 0, node, nodes = this.childNodes;
-			while (node = nodes[i++]) {
-			  if (node.nodeType === 1) count++;
-			}
-			return count;
-		  }
-		});
-	  }
-	  
-	  if (constructor &&
-			constructor.prototype &&
-			constructor.prototype.firstElementChild == null) {
-			Object.defineProperty(constructor.prototype, 'firstElementChild', {
-				get: function() {
-					var node, nodes = this.childNodes, i = 0;
-					while (node = nodes[i++]) {
-						if (node.nodeType === 1) {
-							return node;
-						}
-					}
-					return null;
-				}
-			});
-		}
-		
-		if (constructor &&
-			constructor.prototype &&
-			constructor.prototype.children == null) {
-			Object.defineProperty(constructor.prototype, 'children', {
-			  get: function() {
-				let i = 0, node, nodes = this.childNodes, children = [];
-				while (node = nodes[i++]) {
-				  if (node.nodeType === 1) {
-					children.push(node);
-				  }
-				}
-				return children;
-			  }
-			});
-		  }
-	})(window.Node || window.Element);
 
 	// =========================== STRING/ARRAY .INCLUDES() ===========================
 	if (!String.prototype.includes) {
@@ -152,6 +104,35 @@ var gm = {
 };
 window.addEventListener("load",gm.onDocLoad);
 (function () {
+	
+	// =========================== N (NODE) ===========================
+	gm.n = {
+		childElementCount: function (n) {
+			var i = 0, count = 0, node, nodes = n.childNodes;
+			while (node = nodes[i++]) {
+			  if (node.nodeType === 1) count++;
+			}
+			return count;
+		},
+		firstElementChild: function (n) {
+			var node, nodes = n.childNodes, i = 0;
+			while (node = nodes[i++]) {
+				if (node.nodeType === 1) {
+					return node;
+				}
+			}
+			return null;
+		},
+		children: function (n) {
+			var i = 0, node, nodes = n.childNodes, children = [];
+			while (node = nodes[i++]) {
+			  if (node.nodeType === 1) {
+				children.push(node);
+			  }
+			}
+			return children;
+		}
+	};
 	// =========================== FORMAT NUMBER ===========================
 	gm.formatNumber = function (n) {
 		if (typeof (n) != "number") {
