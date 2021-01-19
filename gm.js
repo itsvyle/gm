@@ -135,7 +135,7 @@ window.addEventListener("load",gm.onDocLoad);
 	};
 	// =========================== SUPPORTS WS ===========================
 	gm.supportWS = function () {
-		return 'WebSocket' in window && window.WebSocket.CLOSING === 2;
+		return ('WebSocket' in window && window.WebSocket.CLOSING === 2);
 	};
 	// =========================== FORMAT NUMBER ===========================
 	gm.formatNumber = function (n) {
