@@ -235,6 +235,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                 if (il < inte.length - 1) {il++;}
             },inte[il]);
         };
+        s();
     };
 
     this.refresh = function () {};
