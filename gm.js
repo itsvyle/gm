@@ -681,7 +681,7 @@ window.addEventListener("load",gm.onDocLoad);
 
 
     gm.sortBy = function() {
-        var fields = [].slice.call(arguments),
+        var fields = Object.values(gm.sortBy.arguments),
             n_fields = fields.length;
 
         return function(A,B) {
@@ -690,26 +690,33 @@ window.addEventListener("load",gm.onDocLoad);
             for(i = 0; i < n_fields; i++) {
                 result = 0;
                 field = fields[i];
-
-                key = typeof field === 'string' ? field : field.name;
-
+                key = field;
+                if (typeof(field) !== "string") {
+                    field=field.name;
+                }
                 a = A[key];
                 b = B[key];
 
-                if (typeof field.primer  !== 'undefined'){
+                if (typeof(field.primer)  !== 'undefined'){
                     a = field.primer(a);
                     b = field.primer(b);
                 }
+                reverse = 1;
+                if (!!field.reverse) {
+                    reverse = -1;
+                }
 
-                reverse = (field.reverse) ? -1 : 1;
-
-                if (a<b) result = reverse * -1;
-                if (a>b) result = reverse * 1;
-                if(result !== 0) break;
+                if (a<b) {result = reverse * -1;}
+                if (a>b) {result = reverse * 1;}
+                if(result !== 0) {break};
             }
             return result;
         }
     };
+
+    // gm.sortBy = function (a,b) {
+    //     return a - b;
+    // };
 
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
