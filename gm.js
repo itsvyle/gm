@@ -290,7 +290,7 @@ window.addEventListener("load",gm.onDocLoad);
 			if (addHTMLBase === true) {
 				html = '<html><head><title>Frame</title><meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" name="viewport"></head><body>' + html + '</body></html>';
 			}
-			var url = 'data:text/html;charset=utf-8,' + encodeURI(html);
+			var url = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
 			this.navigate(url);
 		}
 		
@@ -299,7 +299,7 @@ window.addEventListener("load",gm.onDocLoad);
 			if (showCloseButton !== false) {
 				if (!cl) {
 					var par = this;
-					cl = gm.newItem("span",{className: "__close",innerHTML: "&times;",onclick: function (e) {
+					cl = gm.newItem("span",{className: "__close",innerHTML: /*"&times;"*/"x",onclick: function (e) {
 						par.close();
 					}
 					});
