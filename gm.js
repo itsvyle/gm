@@ -273,6 +273,10 @@ window.addEventListener("load",gm.onDocLoad);
 			document.body.appendChild(this.modal);
 			return this;
 		};
+        var par = this;
+        this.modal.addEventListener("click",function () {
+            par.close();
+        });
 
 		this.navigate = function (url) {
 			if (!this.iframe) {
