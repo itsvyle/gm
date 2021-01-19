@@ -25,7 +25,7 @@ function Session(url_,thread_,interval_) {
     this.onError = function () {};
     this.onMessage = function () {};
 
-    this.isWS = true;
+    this.isWS = gm.supportWS();
     this.ws = null;
     this.sessionData = null;
 
