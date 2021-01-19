@@ -17,6 +17,18 @@
 		});
 	  });
 	})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
+
+    // =========================== OBJECT.VALUES ===========================
+    (function () {
+        if (!Object.values) {
+            Object.values = function (obj) {
+                return Object.keys(obj).map(function(e) {
+                    return obj[e]
+                });
+            };
+        }
+    })();
+
 	// =========================== STRING.ENDSWITH / STRING.STARTSWITH ===========================
 	if (!String.prototype.endsWith) {
 	  String.prototype.endsWith = function(searchString, position) {
@@ -673,7 +685,7 @@ window.addEventListener("load",gm.onDocLoad);
             var val1 = object1[key];
             var val2 = object2[key];
             var areObjects = isObject(val1) && isObject(val2);
-            if (areObjects && !deepEqual(val1, val2) || !areObjects && val1 !== val2
+            if (areObjects && !gm.deepEqual(val1, val2) || !areObjects && val1 !== val2
             ) {return false;}
         }
         return true;
@@ -681,7 +693,7 @@ window.addEventListener("load",gm.onDocLoad);
 
 
     gm.sortBy = function() {
-        var fields = Object.values(gm.sortBy.arguments),
+        var fields = [].slice.call(arguments),
             n_fields = fields.length;
 
         return function(A,B) {
@@ -690,10 +702,9 @@ window.addEventListener("load",gm.onDocLoad);
             for(i = 0; i < n_fields; i++) {
                 result = 0;
                 field = fields[i];
-                key = field;
-                if (typeof(field) !== "string") {
-                    field=field.name;
-                }
+
+                key = typeof(field) === 'string' ? field : field.name;
+
                 a = A[key];
                 b = B[key];
 
@@ -701,22 +712,16 @@ window.addEventListener("load",gm.onDocLoad);
                     a = field.primer(a);
                     b = field.primer(b);
                 }
-                reverse = 1;
-                if (!!field.reverse) {
-                    reverse = -1;
-                }
 
-                if (a<b) {result = reverse * -1;}
-                if (a>b) {result = reverse * 1;}
-                if(result !== 0) {break};
+                reverse = (field.reverse) ? -1 : 1;
+
+                if (a<b){result = reverse * -1};
+                if (a>b){result = reverse * 1};
+                if(result !== 0) {break;}
             }
             return result;
-        }
+        };
     };
-
-    // gm.sortBy = function (a,b) {
-    //     return a - b;
-    // };
 
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
