@@ -1,7 +1,10 @@
 (function (){
-function Session(url_,thread_,interval_) {
+function Session(url_,thread_,interval_,createArguments_) {
     if (!thread_ || !url_) {throw "[Session] INVALID ARGUMENTS";}
     if (!interval_) {interval_ = 1000;}
+    if (!createArguments_ || typeof(createArguments_) != "object") {createArguments_ = {};}
+    createArguments_.thread = thread_;
+    this.createQuery = gm.buildQuery(createArguments_);
     this.thread = thread_;
     this.url = url_;
     this.id = null;
@@ -40,7 +43,7 @@ function Session(url_,thread_,interval_) {
             }
             var par = this;
             this.setStatus(1);
-            gm.request(this.url + "/create?thread=" + encodeURIComponent(this.thread),{json: true},function (r) {
+            gm.request(this.url + "/create?" + this.createQuery,{json: true},function (r) {
                 if (r.status !== 1) {
                     return par.onError("[Session,create]" + r.error);
                 }
@@ -172,7 +175,7 @@ function Session(url_,thread_,interval_) {
             this.stop();
         }
         this.setStatus(1);
-        this.ws = new WebSocket(this.url + "/ws?thread=" + encodeURIComponent(this.thread));
+        this.ws = new WebSocket(this.url + "/ws?"+this.createQuery);
 
         var par = this;
         this.ws.onopen = function () {
