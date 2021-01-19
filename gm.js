@@ -656,6 +656,26 @@ window.addEventListener("load",gm.onDocLoad);
 		return ret;
 	};
 	
+    gm.deepEqual = function (object1, object2) {
+        var isObject = function (object) {return (object != null && typeof object === 'object');};
+        var keys1 = Object.keys(object1);
+        var keys2 = Object.keys(object2);
+
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+        for(var i = i;i < keys1.length;i++) {
+            var key = keys1[i];
+            var val1 = object1[key];
+            var val2 = object2[key];
+            var areObjects = isObject(val1) && isObject(val2);
+            if (areObjects && !deepEqual(val1, val2) || !areObjects && val1 !== val2
+            ) {return false;}
+        }
+        return true;
+    };
+
+
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
