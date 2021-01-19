@@ -35,13 +35,12 @@ function Session(url_,thread_,interval_,createArguments_) {
     if (this.isWS !== true) {
         this.start = function () {this.create();};
         this.create = function () {
+            var par = this;
             if (!!this.id) {
-                var par = this;
                 return this.close(function () {
                     par.create();
                 });
             }
-            var par = this;
             this.setStatus(1);
             gm.request(this.url + "/create?" + this.createQuery,{json: true},function (r) {
                 if (r.status !== 1) {
@@ -75,7 +74,7 @@ function Session(url_,thread_,interval_,createArguments_) {
 
         this.close = function (clb) {
             if (!this.id) {throw "Cannot close without 'session_id' set";}
-            if (typeof(clb) != "function") {clb = () => {};}
+            if (typeof(clb) != "function") {clb = function () {};}
             var par = this;
             gm.request(this.url + "/close?session_id=" + encodeURIComponent(this.id),{json: true},function (r) {
                 if (r.status !== 1) {
@@ -97,7 +96,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                 clearInterval(this.timer);
             }
             this.setStatus(3);
-        }
+        };
 
         this.refresh = function () {
             if (!this.id) {throw "Cannot refresh without 'session_id' set";}
@@ -130,7 +129,7 @@ function Session(url_,thread_,interval_,createArguments_) {
         };
 
         this.send = function (d,clb) {
-            if (typeof(clb) != "function") {clb = () => {};}
+            if (typeof(clb) != "function") {clb = function () {};}
             if (!this.id) {throw "Cannot send without 'session_id' set";}
             var par = this;
             gm.request(this.url + "/send?session_id=" + encodeURIComponent(this.id),{json: true,method: "POST"},function (r) {
@@ -206,7 +205,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                     if (!!m.d) {
                         par.sessionData = m.d;
                         if (!par.sessionData.id) {
-                            return stop();
+                            return par.stop();
                         }
                         par.id = par.sessionData.id;
                         par.startTimer();
@@ -270,7 +269,7 @@ function Session(url_,thread_,interval_,createArguments_) {
     };
 
     this.send = function (d,clb) {
-        if (typeof(clb) != "function") {clb = () => {};}
+        if (typeof(clb) != "function") {clb = function () {};}
         if (!this.id) {throw "Cannot refresh without 'session_id' set";}
         if (!d || typeof(d) != "object") {return;}
         try {
@@ -290,7 +289,7 @@ function Session(url_,thread_,interval_,createArguments_) {
     var Server = {
         Session: Session  
     };
-if (window.gm && window.gm._importAsset) {
+    if (window.gm && window.gm._importAsset) {
 		window.gm._importAsset({
 			key: "Server",
 			value: Server
