@@ -1,3 +1,4 @@
+(function (){
 function Session(url_,thread_,interval_) {
     if (!thread_ || !url_) {throw "[Session] INVALID ARGUMENTS";}
     if (!interval_) {interval_ = 1000;}
@@ -284,3 +285,22 @@ function Session(url_,thread_,interval_) {
         } catch (err) {}
     };
 }
+    var Server = {
+        Session: Session  
+    };
+if (window.gm && window.gm._importAsset) {
+		window.gm._importAsset({
+			key: "Server",
+			value: Server
+		});
+	} else {
+		if (!Array.isArray(window._gm_assets)) {
+			window._gm_assets = [];
+		}
+		window._gm_assets.push({
+			key: "Server",
+			value: Server
+		});
+	}
+
+})();
