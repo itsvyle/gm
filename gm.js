@@ -133,6 +133,10 @@ window.addEventListener("load",gm.onDocLoad);
 			return children;
 		}
 	};
+	// =========================== SUPPORTS WS ===========================
+	gm.supportWS = function () {
+		return 'WebSocket' in window && window.WebSocket.CLOSING === 2;
+	};
 	// =========================== FORMAT NUMBER ===========================
 	gm.formatNumber = function (n) {
 		if (typeof (n) != "number") {
