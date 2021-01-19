@@ -680,6 +680,37 @@ window.addEventListener("load",gm.onDocLoad);
     };
 
 
+    gm.sortBy = function() {
+        var fields = [].slice.call(arguments),
+            n_fields = fields.length;
+
+        return function(A,B) {
+            var a, b, field, key, primer, reverse, result, i;
+
+            for(i = 0; i < n_fields; i++) {
+                result = 0;
+                field = fields[i];
+
+                key = typeof field === 'string' ? field : field.name;
+
+                a = A[key];
+                b = B[key];
+
+                if (typeof field.primer  !== 'undefined'){
+                    a = field.primer(a);
+                    b = field.primer(b);
+                }
+
+                reverse = (field.reverse) ? -1 : 1;
+
+                if (a<b) result = reverse * -1;
+                if (a>b) result = reverse * 1;
+                if(result !== 0) break;
+            }
+            return result;
+        }
+    };
+
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
