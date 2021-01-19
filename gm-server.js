@@ -167,6 +167,17 @@ function Session(url_,thread_,interval_,createArguments_) {
         lo = lo + window.location.pathname;
     }
     this.url = lo + this.url;
+    
+    this.last_create = Date.now();
+    this.startReconnectTimer = function () {
+        var par =this;
+        var to = setInterval(function () {
+            if (par.last_create + 3000 > Date.now()) {return;}
+            if (par.status === 2) {return clearInterval(to);}
+            par.create();
+            clearInterval(to);
+        },100);
+    };
 
     this.create = function () {
         if (this.ws !== null) {
@@ -176,6 +187,7 @@ function Session(url_,thread_,interval_,createArguments_) {
         }
         this.setStatus(1);
         this.ws = new WebSocket(this.url + "/ws?"+this.createQuery);
+        this.last_create = Date.now();
 
         var par = this;
         this.ws.onopen = function () {
@@ -224,20 +236,6 @@ function Session(url_,thread_,interval_,createArguments_) {
         };
     };
     
-    this.startReconnectTimer = function () {
-        var inte = [1000,2000,5000,10000];
-        var il = 0;
-        var par = this;
-        var s = function () {
-            var ti = setTimeout(function () {
-                if (par.status === 2) {return clearTimeout(ti);}
-                par.create();
-                if (il < inte.length - 1) {il++;}
-            },inte[il]);
-        };
-        s();
-    };
-
     this.refresh = function () {};
 
     this.stop = function () {
