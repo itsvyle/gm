@@ -1,21 +1,3 @@
-gm.onload(onload);
-var not,session;
-function onload() {
-    not = new gm.NotificationMessages();
-    session = new Session("/s","test");
-    session.onError = function (e) {
-        not.addMessage(e,"background-color: red;",5000,true);
-    }
-    session.onMessage = function (m) {
-        console.log(m);
-    };
-    session.start();
-}
-function log(t) {
-    console.log(t);
-    document.body.innerHTML += t + "<br>";
-}
-
 function Session(url_,thread_,interval_) {
     if (!thread_ || !url_) {throw "[Session] INVALID ARGUMENTS";}
     if (!interval_) {interval_ = 1000;}
