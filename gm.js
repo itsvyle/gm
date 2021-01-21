@@ -1,4 +1,13 @@
 (function () {
+    //https://dprox--lfny.repl.co/image?url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F11381673%2Fdetecting-a-mobile-browser
+    window.isMobile = function () {
+        var match = window.matchMedia || window.msMatchMedia;
+        if(match) {
+            var mq = match("(pointer:coarse)");
+            return mq.matches;
+        }
+        return false;
+    };
 	// =========================== IMPORTING METHODS FOR OLD BROWSERS ===========================
 	
 	// =========================== NODE.REMOVE() ===========================
