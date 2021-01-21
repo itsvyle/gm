@@ -731,7 +731,20 @@ window.addEventListener("load",gm.onDocLoad);
             return result;
         };
     };
-
+		
+	
+	gm.formatTime = function (milliseconds) {
+		if (typeof(milliseconds) != "number") {return "NaN";}
+		if (milliseconds >= (3600 * 24 * 1000)) {//more than a day
+		    return `${Math.floor(milliseconds / (1000 * 60 * 60 * 24))}d ${Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h ${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
+		} else if (milliseconds >= 3600 * 1000) {
+		    return `${Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h ${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
+		} else if (milliseconds >= 60 * 1000) {
+		    return `${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
+		} else {
+		    return String(milliseconds) + "s";
+		}
+	    }
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
