@@ -742,7 +742,7 @@ window.addEventListener("load",gm.onDocLoad);
 		} else if (milliseconds >= 60 * 1000) {
 		    return `${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
 		} else {
-		    return String(milliseconds) + "s";
+		    return String(Math.round(milliseconds / 1000)) + "s";
 		}
 	    }
 	if (window._gm_assets) {
