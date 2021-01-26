@@ -27,6 +27,61 @@
 	  });
 	})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
+
+	// =========================== ARRAY.EVERY ===========================
+	if (!Array.prototype.every) {
+		  Array.prototype.every = function(callbackfn, thisArg) {
+			'use strict';
+			var T, k;
+			if (this == null) {
+			  throw('this is null or not defined');
+			}
+			var O = Object(this);
+			var len = O.length >>> 0;
+			if (typeof(callbackfn) !== 'function') {
+			  throw("type error");
+			}
+			if (arguments.length > 1) {
+			  T = thisArg;
+			}
+			k = 0;
+			while (k < len) {
+			  var kValue;
+			  if (k in O) {
+				var testResult;
+				kValue = O[k];
+				if(T){
+					testResult = callbackfn.call(T, kValue, k, O);
+				} else {
+					testResult = callbackfn(kValue,k,O);
+				}
+				if (!testResult) {
+				  return false;
+				}
+			  }
+			  k++;
+			}
+			return true;
+		  };
+		};
+
+	// =========================== NODE.REPLACEWITH() ===========================
+		(function (arr) {
+		  arr.forEach(function (item) {
+			if (item.hasOwnProperty('replaceWith')) {
+			  return;
+			}
+			Object.defineProperty(item, 'replaceWith', {
+			  configurable: true,
+			  enumerable: true,
+			  writable: true,
+			  value: function replaceWith(node) {
+				this.parentNode.replaceChild(node, this.parentNode);
+			  }
+			});
+		  });
+		})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
+	
     // =========================== OBJECT.VALUES ===========================
     (function () {
         if (!Object.values) {
@@ -154,6 +209,144 @@ window.addEventListener("load",gm.onDocLoad);
 			return children;
 		}
 	};
+	
+	// =========================== gm.FLAGS ===========================
+	(function () {
+		var Flags = function(vals,flags_) {
+			if (typeof(vals) !== "object" || !vals) {throw "'vals' must be an object";}
+			
+			this.flag_values = {};
+			for(var n_ in vals) {
+				var v_ = vals[n_];
+				if (typeof(v_) !== "number") {continue;}
+				this.flag_values[n_] = (1 << v_);
+			}
+			
+			this.flags = (typeof(flags_) === "number") ? flags_ : 0;
+			
+			this.add = function(flag) {
+				var par = this;
+				if (Array.isArray(flag)) {
+					return flag.every(function (f) {
+						return par.add(f);
+					});
+				}
+				if (!flag || typeof(flag) !== "string") {throw "'flag' must be a string";}
+				if (!flag in this.flag_values) {return false;}
+				this.flags |= this.flag_values[flag];
+				return true;
+			};
+			
+			this.has = function (flag) {
+				var par = this;
+				if (Array.isArray(flag)) {
+					return flag.every(function (f) {
+						return par.has(f);
+					});
+				}
+				if (!flag || typeof(flag) !== "string") {throw "'flag' must be a string";}
+				if (!flag in this.flag_values) {return false;}
+				flag = this.flag_values[flag];
+				return ((this.flags & flag) === flag);
+			};
+			
+			this.remove = function (flag) {
+				var par = this;
+				if (Array.isArray(flag)) {
+					return flag.every(function (f) {
+						return par.remove(f);
+					});
+				}
+				if (!flag || typeof(flag) !== "string") {throw "'flag' must be a string";}
+				if (!flag in this.flag_values) {return false;}
+				flag = this.flag_values[flag];
+				this.flags &= ~flag;
+				return true;
+			};
+			
+			this.array = function () {
+				var r = [];
+				for(var f in this.flag_values) {
+					if (this.has(f)) {r.push(f);}
+				}
+				return r;
+			};
+			
+			this.object = function () {
+				var r = {};
+				for(var f in this.flag_values) {
+					r[f] = this.has(f);
+				}
+				return r;
+			};
+			
+			this.setFlags = function (f) {
+				if (typeof(f) !== "number") {throw("'f' must be a number");}
+				this.flags = f;
+			};
+			
+			this.set = function (flag,val) {
+				if (val === true) {
+					this.add(flag);
+				} else if (val === false) {
+					this.remove(flag);
+				}
+			};
+			
+			this.fromObject = function (o) {
+				if (!o || typeof(o) !== "object") {return false;}
+				for(var n in o) {
+					if (!(n in this.flag_values)) {continue;}
+					this.set(n,o[n]);
+				}
+			};
+			
+			this.addAll = function () {
+				for(var f in this.flag_values) {
+					this.flags |= this.flag_values[f];
+				}
+			};
+			
+			this.cname = null;
+			this.version = null;
+			this.save = function () {
+				throw("Flags not adapted to saving to cookies");
+			};
+			
+			this.cookieName = function () {return null;}
+			this.isNew = function () {return false;}
+			this.toString = function () {
+				return String(this.flags);
+			};
+		}
+		
+		Flags.fromCookie = function (vals,cname,version) {
+			if (!version) {throw("'version' is absolutely required if working with cookies");}
+			version = String(version);
+			if (!cname || typeof(cname) !== "string") {throw("'cname' should be a string");}
+			
+			var actu = gm.getCookie(cname + "_v" + version);
+			if (!actu) {actu = null;} else {actu = gm.parseInt(actu);}
+			
+			var fl = new Flags(vals,actu);
+			fl.cname = cname;
+			fl.version = version;
+			fl.cookieName = function () {
+				return this.cname + "_v" + this.version;
+			};
+			fl.save = function (expiresdays) {
+				var c = this.cookieName();
+				return gm.setCookie(c,this.toString(),expiresdays);
+			};
+			fl.isNew = function () {
+				return (!gm.getCookie(this.cookieName()));
+			}
+			return fl;
+		};
+		gm.Flags = Flags;
+	})();
+
+	
 	// =========================== SUPPORTS WS ===========================
 	gm.supportWS = function () {
 		return ('WebSocket' in window && window.WebSocket.CLOSING === 2);
@@ -744,7 +937,7 @@ window.addEventListener("load",gm.onDocLoad);
 		} else {
 		    return String(Math.round(milliseconds / 1000)) + "s";
 		}
-	    }
+	};
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
