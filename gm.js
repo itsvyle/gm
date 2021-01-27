@@ -887,7 +887,7 @@ window.addEventListener("load",gm.onDocLoad);
         if (keys1.length !== keys2.length) {
             return false;
         }
-        for(var i = i;i < keys1.length;i++) {
+        for(var i = 0;i < keys1.length;i++) {
             var key = keys1[i];
             var val1 = object1[key];
             var val2 = object2[key];
