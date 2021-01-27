@@ -31,7 +31,6 @@
 	// =========================== ARRAY.EVERY ===========================
 	if (!Array.prototype.every) {
 		  Array.prototype.every = function(callbackfn, thisArg) {
-			'use strict';
 			var T, k;
 			if (this == null) {
 			  throw('this is null or not defined');
@@ -64,7 +63,6 @@
 			return true;
 		  };
 		};
-
 	// =========================== NODE.REPLACEWITH() ===========================
 		(function (arr) {
 		  arr.forEach(function (item) {
@@ -87,7 +85,7 @@
         if (!Object.values) {
             Object.values = function (obj) {
                 return Object.keys(obj).map(function(e) {
-                    return obj[e]
+                    return obj[e];
                 });
             };
         }
@@ -177,8 +175,9 @@ var gm = {
 		gm[o.key] = o.value;
 	}
 
-};
+}
 window.addEventListener("load",gm.onDocLoad);
+
 (function () {
 	
 	// =========================== N (NODE) ===========================
@@ -405,12 +404,15 @@ window.addEventListener("load",gm.onDocLoad);
 		   // code for old IE browsers
 		   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
+
+        if (!Array.isArray(opts.accept_codes)) {opts.accept_codes = [200];}
+
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				// && this.status == 200
 				var r = {status: null,http_code: this.status,res: null,error_level: 0,error: null};
 				r.headers = this.getAllResponseHeaders();
-				if (this.status != 200) {
+				if (opts.accept_codes.includes(this.status) === false) {
 					r.status = 0;
 					r.error_level = 1;
 					r.error = "Error making request(" + String(this.status) + ": " + this.responseText + ")";
@@ -517,7 +519,7 @@ window.addEventListener("load",gm.onDocLoad);
 			if (showCloseButton !== false) {
 				if (!cl) {
 					var par = this;
-					cl = gm.newItem("span",{className: "__close",innerHTML: /*"&times;"*/"x",onclick: function (e) {
+					cl = gm.newItem("span",{className: "__close",innerHTML:"x",onclick: function (e) {
 						par.close();
 					}
 					});
@@ -630,7 +632,9 @@ window.addEventListener("load",gm.onDocLoad);
 			var n = textarea.scrollHeight;
 			if (n < minheight_) {n = minheight_;}
 			textarea.setAttribute("style","height: " + String(n)+"px");
-			if (isLast !== true) {/*handler(null,true);*/}
+			if (isLast !== true) {
+                //handler(null,true);
+            }
 		};
 		textarea.addEventListener("keypress",handler);
 		textarea.addEventListener("keyup",handler);
@@ -755,6 +759,7 @@ window.addEventListener("load",gm.onDocLoad);
 			item.appendChild(this.container);
 		}
 	};
+    
 	// =========================== COPYTEXT ===========================
 	gm.copyText = function (text,clb) {
 		if (typeof(clb) != "function") {clb = function () {};}
@@ -893,7 +898,6 @@ window.addEventListener("load",gm.onDocLoad);
         return true;
     };
 
-
     gm.sortBy = function() {
         var fields = [].slice.call(arguments),
             n_fields = fields.length;
@@ -929,11 +933,11 @@ window.addEventListener("load",gm.onDocLoad);
 	gm.formatTime = function (milliseconds) {
 		if (typeof(milliseconds) != "number") {return milliseconds;}
 		if (milliseconds >= (3600 * 24 * 1000)) {//more than a day
-		    return `${Math.floor(milliseconds / (1000 * 60 * 60 * 24))}d ${Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h ${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
+		    return String(Math.floor(milliseconds / (1000 * 60 * 60 * 24))) + "d " + String(Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) + "h " + String(Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))) + "m " + Math.floor((milliseconds % (1000 * 60)) / 1000) + "s";
 		} else if (milliseconds >= 3600 * 1000) {
-		    return `${Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}h ${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
+		    return String(Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) + "h " + String(Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60)))+ "m " + String(Math.floor((milliseconds % (1000 * 60)) / 1000)) + "s";
 		} else if (milliseconds >= 60 * 1000) {
-		    return `${Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))}m ${Math.floor((milliseconds % (1000 * 60)) / 1000)}s`;
+		    return String(Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60))) + "m " + String(Math.floor((milliseconds % (1000 * 60)) / 1000)) + "s";
 		} else {
 		    return String(Math.round(milliseconds / 1000)) + "s";
 		}
@@ -944,4 +948,4 @@ window.addEventListener("load",gm.onDocLoad);
 		}
 	}
 	window._gm_assets = null;
-})(); /*closing of initialization function*/
+})();
