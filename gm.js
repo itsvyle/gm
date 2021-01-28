@@ -231,6 +231,13 @@ window.addEventListener("load",gm.onDocLoad);
         }
         return o;
     };
+
+    gm.base = function (id) {
+        if (!id) {id = "base";}
+        var b = document.getElementById(id);
+        if (!b) {return null;}
+        return gm.JSONParse(b.innerHTML);
+    };
 	
 	// =========================== gm.FLAGS ===========================
 	(function () {
