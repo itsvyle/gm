@@ -220,6 +220,17 @@ window.addEventListener("load",gm.onDocLoad);
 			return children;
 		}
 	};
+
+    // =========================== gm.FROMIDS ===========================
+    gm.fromIDS = function (o) {
+        if (!o || typeof(o) !== "object") {return {};}
+        for(var n in o) {
+            var id = o[n];
+            if (!id || typeof(id) != "string") {id = n;}
+            o[n] = document.getElementById(id);
+        }
+        return o;
+    };
 	
 	// =========================== gm.FLAGS ===========================
 	(function () {
