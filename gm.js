@@ -462,6 +462,9 @@ window.addEventListener("load",gm.onDocLoad);
 						r.res = this.responseText;
 					}
 				}
+                if (r.status === 0 && opts.notifier && typeof(opts.notifier) == "object") {
+                    opts.notifier.addMessage(r.error,"background-color: red;",5000,true);
+                }
 				return callback(r);
 			}
 		};
