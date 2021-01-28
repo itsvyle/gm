@@ -469,6 +469,17 @@ window.addEventListener("load",gm.onDocLoad);
 			callback({status: 0,error_level: 2,error: "Error making request"});
 			return xhttp.abort();
 		};
+
+        if (opts.body && typeof(opts.body)) {
+            try {
+                opts.body = JSON.stringify(opts.body);
+                opts.headers['content-type'] = "application/json";
+            } catch (err) {
+                console.error(err);
+                opts.body = null;
+            }
+        }
+
 		if (!opts.method) {opts.method = "GET";}
 		xhttp.open(opts.method, url, true);
 			
