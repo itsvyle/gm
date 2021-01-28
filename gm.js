@@ -473,7 +473,7 @@ window.addEventListener("load",gm.onDocLoad);
 			return xhttp.abort();
 		};
 
-        if (opts.body && typeof(opts.body)) {
+        if (opts.body && typeof(opts.body) === "object") {
             try {
                 opts.body = JSON.stringify(opts.body);
                 opts.headers['content-type'] = "application/json";
