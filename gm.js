@@ -444,6 +444,15 @@ window.addEventListener("load",gm.onDocLoad);
 				// && this.status == 200
 				var r = {status: null,http_code: this.status,res: null,error_level: 0,error: null};
 				r.headers = this.getAllResponseHeaders();
+				r.headers = {};
+				var hs = this.getAllResponseHeaders().trim().split(/[\r\n]+/);
+				hs.forEach(function (line) {
+				    var parts = line.split(': ');
+				    var header = parts.shift();
+				    var value = parts.join(': ');
+				    r.headers[header] = value;
+				});
+				
 				if (opts.accept_codes.includes(this.status) === false) {
 					r.status = 0;
 					r.error_level = 1;
