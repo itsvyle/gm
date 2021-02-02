@@ -163,7 +163,7 @@ var items = [
 
 ```
 
-##CSS Defaults
+## CSS Defaults
 ```css
 html, body, div, h1, h2, h3, h4, h5,  h6, ul,  ol,  li,  p,  blockquote, pre,  form,  fieldset,  table,  th,  td {
     margin: 0;
