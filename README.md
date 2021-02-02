@@ -8,6 +8,7 @@
 ```html
 <html>
   <head>
+    <meta charset="utf-8">
     <title>GM !</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://raw.githubusercontent.com/itsvyle/gm/main/gm.js" type="application/javascript"></script>
