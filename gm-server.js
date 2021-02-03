@@ -5,6 +5,19 @@ function Session(url_,thread_,interval_,createArguments_) {
     if (!createArguments_ || typeof(createArguments_) != "object") {createArguments_ = {};}
     createArguments_.thread = thread_;
     this.createQuery = gm.buildQuery(createArguments_);
+
+    this.setQuery = function (args_) {
+        if (args_ === null || typeof(args_) != "object" || Array.isArray(args_)) {
+            args_ = {};
+        }
+        args_ = Object.assign({
+            thread: this.thread
+        },args_);
+        createArguments_ = args_;
+        this.createQuery = gm.buildQuery(args_);
+        return this;
+    }
+
     this.thread = thread_;
     this.url = url_;
     this.id = null;
