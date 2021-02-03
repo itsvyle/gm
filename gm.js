@@ -267,14 +267,15 @@ var gm = {
 	_importAsset: function(o) {
 		gm[o.key] = o.value;
 	},
-    debug: function (f) {
+    debug: function (f,name) {
+        if (!name) {name = "";} else {name = " (" + name + ")";}
         if (typeof(f) !== "function") {
-            return alert("Error: tried var is not a function");
+            return alert("Error" + name + ": tried var is not a function");
         }
         try {
             f();
         } catch (err) {
-            alert("Error: " + err);
+            alert("Error" + name + ": " + err);
         }
     }
 
