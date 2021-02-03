@@ -472,10 +472,6 @@ window.addEventListener("load",gm.onDocLoad);
             opts.headers = {
                 "content-type": "application/x-www-form-urlencoded"
             };
-        } else {
-            if (!opts.headers['content-type']) {
-                opts.headers['content-type'] = "application/x-www-form-urlencoded";
-            }
         }
 		var xhttp
 		if (window.XMLHttpRequest) {
@@ -534,7 +530,7 @@ window.addEventListener("load",gm.onDocLoad);
         if (opts.body !== null && (typeof(opts.body) === "object" || Array.isArray(opts.body))) {
             try {
                 opts.body = JSON.stringify(opts.body);
-                opts.headers['content-type'] = "application/json";
+               if (!opts.headers['content-type']) { opts.headers['content-type'] = "application/json";}
             } catch (err) {
                 console.error(err);
                 opts.body = null;
@@ -547,7 +543,9 @@ window.addEventListener("load",gm.onDocLoad);
 		for(var h in opts.headers) {
             xhttp.setRequestHeader(h,opts.headers[h]);
         }
-
+		if (!opts.headers['content-type']) {
+			opts.headers['content-type'] = "application/x-www-form-urlencoded";
+		    }
 		
 		if (opts.body) {
 			xhttp.send(opts.body);
