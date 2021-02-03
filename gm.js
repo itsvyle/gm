@@ -266,7 +266,17 @@ var gm = {
 	},
 	_importAsset: function(o) {
 		gm[o.key] = o.value;
-	}
+	},
+    debug: function (f) {
+        if (typeof(f) !== "function") {
+            return alert("Error: tried var is not a function");
+        }
+        try {
+            f();
+        } catch (err) {
+            alert("Error: " + err);
+        }
+    }
 
 }
 window.addEventListener("load",gm.onDocLoad);
