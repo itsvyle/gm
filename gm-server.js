@@ -132,7 +132,9 @@ function Session(url_,thread_,interval_,createArguments_) {
             if (typeof(clb) != "function") {clb = function () {};}
             if (!this.id) {throw "Cannot send without 'session_id' set";}
             var par = this;
-            gm.request(this.url + "/send?session_id=" + encodeURIComponent(this.id),{json: true,method: "POST"},function (r) {
+            gm.request(this.url + "/send?session_id=" + encodeURIComponent(this.id),{
+                json: true,method: "POST",body: d
+            },function (r) {
                 if (r.status !== 1) {
                     clb(false);
                     return par.onError("[Session,send]" + r.error);
