@@ -761,30 +761,36 @@ window.addEventListener("load",gm.onDocLoad);
 	// =========================== MULTILINE TEXT AREA ===========================
 	gm.multilineTextArea = function (textarea,minheight_,submit) {
 		if (!minheight_) {minheight_ = textarea.clientHeight;}
-		var handler = function (event,isLast) {
-			if (!event) {event = {which: -1};}
-			if (isLast !== true) {
-				if (event.which == 13 && !event.shiftKey && textarea.value.trim() != "") {
-					event.preventDefault();
-					if (typeof(submit) == "function") {submit(textarea);}
-				} else if (event.which == 13 && event.shiftKey) {
-					textarea.value += '\n';
-				} else if (event.which == 13) {
-					event.preventDefault();
-				}	
-			}
-			
-			textarea.setAttribute("style","height: 1px");
+        textarea.refresh = function () {
+            textarea.setAttribute("style","height: 1px");
 			var n = textarea.scrollHeight;
 			if (n < minheight_) {n = minheight_;}
 			textarea.setAttribute("style","height: " + String(n)+"px");
-			if (isLast !== true) {
-                //handler(null,true);
-            }
+        };
+		var handler = function (event,isLast) {
+			if (!event) {event = {which: -1};}
+            if (event.which == 13 && !event.shiftKey && textarea.value.trim() != "") {
+                event.preventDefault();
+                if (typeof(submit) == "function") {
+                    if(submit(textarea) !== true) {
+                        
+                    }
+                }
+            } else if (event.which == 13 && event.shiftKey) {
+                if(textarea.value.trim() != "") {textarea.value += '\n';}
+            } else if (event.which == 13) {
+                event.preventDefault();
+            }	
+			
+			textarea.refresh();
 		};
+		// textarea.addEventListener("keypress",handler);
 		textarea.addEventListener("keypress",handler);
-		textarea.addEventListener("keyup",handler);
+        textarea.addEventListener("paste",function (e) {
+            setTimeout(function () {handler();},1);
+        });
 		handler();
+        return handler;
 	};
 
 	// =========================== CONTEXT MENU ===========================
