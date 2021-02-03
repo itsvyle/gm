@@ -27,6 +27,8 @@ function Session(url_,thread_,interval_,createArguments_) {
     };
     this.onError = function () {};
     this.onMessage = function () {};
+    this.onOpen = function () {};
+    this.onClose = function () {};
 
     this.isWS = gm.supportWS();
     this.ws = null;
@@ -70,6 +72,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                 par.refresh();
             },interval_);
             par.setStatus(2);
+            this.onOpen();
         };
 
         this.close = function (clb) {
@@ -86,7 +89,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                 }
                 par.stop();
                 clb();
-                par.setStatus(3);
+                // par.setStatus(3);
             });
         };
 
@@ -96,6 +99,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                 clearInterval(this.timer);
             }
             this.setStatus(3);
+            par.onClose();
         };
 
         this.refresh = function () {
