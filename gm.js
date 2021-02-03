@@ -27,7 +27,56 @@
 	  });
 	})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
+    // =========================== ARRAY.indexObject ===========================
+    if (!Array.prototype.indexObject) {
+        Array.prototype.indexObject = function (item,fields) {
+            if (!fields) {
+                throw "'fields' must be an array";
+            }
+            if (!Array.isArray(fields)) {fields = [fields];}
+            if (item === null || item === undefined) {
+                return this.length - 1;
+            }
+            if (typeof(item) !== "object") {
+                throw "'item' must be an object";
+            }
+            var a,b, c,ite,key,field,res,rev,val;
+            a = 0;
+            b = this.length;
+            var par = this;
 
+            var fi = function (ifields,it) {
+                field = fields[ifields];
+                key = typeof(field) === 'string' ? field : field.name;
+                val = item[key];
+                key = it[key];
+                if (typeof(field.primer) !== "undefined") {
+                    key = field.primer(key);
+                    val = field.primer(val);
+                }
+                var last = (ifields > fields.length - 2);
+                if (key === val) {
+                    if (last) {
+                        return c;
+                    }
+                    return fi(ifields + 1,it)
+                } else if (key < val) {
+                    a = c + 1
+                } else {
+                    b = c
+                }
+                return null;
+            };
+
+            while (b - a > 0) {
+                c = Math.floor((a + b) / 2);
+                ite = this[c];
+                fi(0,ite);
+            }
+            return b;
+            
+        };
+    }
 	// =========================== ARRAY.EVERY ===========================
 	if (!Array.prototype.every) {
 		  Array.prototype.every = function(callbackfn, thisArg) {
@@ -482,7 +531,7 @@ window.addEventListener("load",gm.onDocLoad);
 			return xhttp.abort();
 		};
 
-        if (opts.body && typeof(opts.body) === "object") {
+        if (opts.body !== null && (typeof(opts.body) === "object" || Array.isArray(opts.body))) {
             try {
                 opts.body = JSON.stringify(opts.body);
                 opts.headers['content-type'] = "application/json";
