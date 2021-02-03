@@ -510,10 +510,8 @@ window.addEventListener("load",gm.onDocLoad);
 		if (typeof(opts) == "function") {callback = opts;opts = {};} else if (!opts) {
 			opts = {};
 		}
-		if (typeof(opts.headers) != "object") {
-            opts.headers = {
-                "content-type": "application/x-www-form-urlencoded"
-            };
+		if (typeof(opts.headers) != "object" || opts.headers === null) {
+            opts.headers = {};
         }
 		var xhttp
 		if (window.XMLHttpRequest) {
