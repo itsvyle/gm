@@ -47,6 +47,16 @@ function Session(url_,thread_,interval_,createArguments_) {
     this.ws = null;
     this.sessionData = null;
 
+    this.setData = function (d) {
+        if (this.status === 2) {
+            this.send({
+                thread: "_",
+                type: "set_data",
+                d: d
+            });
+        }
+    };
+
     if (this.isWS !== true) {
         this.start = function () {this.create();};
         this.create = function () {
@@ -139,7 +149,10 @@ function Session(url_,thread_,interval_,createArguments_) {
                     if (typeof(m) != "object" || Array.isArray(m)) {continue;}
                     if (!m.type || typeof(m.type) != "string") {continue;}
                     if (!("d" in m)) {m.d = null;}
-                    if (!m.thread || m.thread !== par.thread) {continue;}
+                    if (!m.thread || (m.thread !== par.thread && m.thread !== "_")) {continue;}
+                    if (m.thread == "_") {
+                        
+                    }
                     par.onMessage(m);
                 }
             });
