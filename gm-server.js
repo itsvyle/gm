@@ -112,7 +112,7 @@ function Session(url_,thread_,interval_,createArguments_) {
                 clearInterval(this.timer);
             }
             this.setStatus(3);
-            par.onClose();
+            this.onClose();
         };
 
         this.refresh = function () {
