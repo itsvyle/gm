@@ -6,13 +6,29 @@
 ## Importation
 **Import from GitHub**
 ```html
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>GM !</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://raw.githubusercontent.com/itsvyle/gm/main/gm.js" type="application/javascript"></script>
     <link href="https://raw.githubusercontent.com/itsvyle/gm/main/gm.css" rel="stylesheet">
+  </head>
+  <body>
+    <!--put whatever code here-->
+  </body>
+</html>
+```
+
+**From Cloned**
+```html
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GM !</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/gm/gm.js" type="application/javascript"></script>
+    <link href="/gm/gm.css" rel="stylesheet">
   </head>
   <body>
     <!--put whatever code here-->
