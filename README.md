@@ -36,6 +36,22 @@
 </html>
 ```
 
+**From REPL Proxy**
+```html
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GM !</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//gm.lfny.repl.co/gm/gm.js" type="application/javascript"></script>
+    <link href="//gm.lfny.repl.co/gm/gm.css" rel="stylesheet">
+  </head>
+  <body>
+    <!--put whatever code here-->
+  </body>
+</html>
+```
+
 # Functions
 *Add `gm.` in front of every one of those*
 
