@@ -1098,6 +1098,17 @@ window.addEventListener("load",gm.onDocLoad);
         }
         return true;
     };
+	    
+	gm.removeAccents = function (str) {
+        if (typeof(str) !== "string") return null;
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+	
+	gm.firstUpper = function (str) {
+        if (typeof(str) !== "string") return null;
+        if (str.length < 1) return str.toUpperCase();
+        return str[0].toUpperCase() + str.slice(1).toLowerCase();
+    };
 
     gm.sortBy = function() {
         var fields = [].slice.call(arguments),
