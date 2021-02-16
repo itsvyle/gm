@@ -558,9 +558,9 @@ window.addEventListener("load",gm.onDocLoad);
 	// =========================== REQUEST ===========================
 	gm.request = function (url,opts,callback) {
         var isPromise = false;
-		if (typeof (clb) !== "function") {
+		if (typeof (callback) !== "function") {
             isPromise = true;
-            clb = function (r) {
+            callback = function (r) {
                 return new Promise(function (resolve,reject) {
                     return (r.status === 1) ? resolve(r) : reject(r);
                 });
@@ -656,7 +656,7 @@ window.addEventListener("load",gm.onDocLoad);
 		}
         if (isPromise) {
             return new Promise(function (resolve,reject) {
-                clb = function (r) {
+                callback = function (r) {
                     return (r.status === 1) ? resolve(r) : reject(r);
                 };
             });
