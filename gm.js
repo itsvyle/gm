@@ -557,6 +557,15 @@ window.addEventListener("load",gm.onDocLoad);
 	
 	// =========================== REQUEST ===========================
 	gm.request = function (url,opts,callback) {
+        var isPromise = false;
+		if (typeof (clb) !== "function") {
+            isPromise = true;
+            clb = function (r) {
+                return new Promise(function (resolve,reject) {
+                    return (r.status === 1) ? resolve(r) : reject(r);
+                });
+            };
+        }
 		if (typeof(opts) == "function") {callback = opts;opts = {};} else if (!opts) {
 			opts = {};
 		}
@@ -645,6 +654,13 @@ window.addEventListener("load",gm.onDocLoad);
 		} else {
 			xhttp.send();
 		}
+        if (isPromise) {
+            return new Promise(function (resolve,reject) {
+                clb = function (r) {
+                    return (r.status === 1) ? resolve(r) : reject(r);
+                };
+            });
+        }
 	};
 	
 	// =========================== GET DATA URL =============================
