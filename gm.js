@@ -1164,7 +1164,7 @@ window.addEventListener("load",gm.onDocLoad);
 		    if (m === null) {return false;}
 		    return clb(m);
 		};
-	    }
+	    };
 		
 	
 	gm.formatTime = function (milliseconds) {
