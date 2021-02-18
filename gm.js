@@ -1160,7 +1160,7 @@ window.addEventListener("load",gm.onDocLoad);
 	gm.JSONparseWSMessage = function (clb) {
 		return function (event) {
 		    if (!event.data) {return false;}
-		    let m = JSONParse(event.data);
+		    let m = gm.JSONParse(event.data);
 		    if (m === null) {return false;}
 		    return clb(m);
 		};
