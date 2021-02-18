@@ -1156,6 +1156,15 @@ window.addEventListener("load",gm.onDocLoad);
             return result;
         };
     };
+	
+	gm.JSONparseWSMessage: function (clb) {
+		return function (event) {
+		    if (!event.data) {return false;}
+		    let m = JSONParse(event.data);
+		    if (m === null) {return false;}
+		    return clb(m);
+		};
+	    }
 		
 	
 	gm.formatTime = function (milliseconds) {
