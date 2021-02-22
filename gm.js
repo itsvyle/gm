@@ -1114,17 +1114,18 @@ window.addEventListener("load",gm.onDocLoad);
         }
         return true;
     };
-	    
-	gm.removeAccents = function (str) {
-        if (typeof(str) !== "string") return null;
+	
+	/*gm.removeAccents = function (str) {
+        if (typeof(str) !== "string") {return null;}
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
 	
 	gm.firstUpper = function (str) {
-        if (typeof(str) !== "string") return null;
-        if (str.length < 1) return str.toUpperCase();
+        if (typeof(str) !== "string") {return null;}
+        if (str.length < 1) {return str.toUpperCase();
         return str[0].toUpperCase() + str.slice(1).toLowerCase();
     };
+    */
 
     gm.sortBy = function() {
         var fields = [].slice.call(arguments),
@@ -1160,13 +1161,12 @@ window.addEventListener("load",gm.onDocLoad);
 	gm.JSONparseWSMessage = function (clb) {
 		return function (event) {
 		    if (!event.data) {return false;}
-		    let m = gm.JSONParse(event.data);
+		    var m = gm.JSONParse(event.data);
 		    if (m === null) {return false;}
 		    return clb(m);
 		};
     };
-		
-	
+
 	gm.formatTime = function (milliseconds) {
 		if (typeof(milliseconds) != "number") {return milliseconds;}
 		if (milliseconds >= (3600 * 24 * 1000)) {//more than a day
@@ -1179,6 +1179,7 @@ window.addEventListener("load",gm.onDocLoad);
 		    return String(Math.round(milliseconds / 1000)) + "s";
 		}
 	};
+    
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
 			gm._importAsset(window._gm_assets[i]);
