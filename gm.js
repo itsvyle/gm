@@ -1132,6 +1132,7 @@ window.addEventListener("load",gm.onDocLoad);
 	
     gm.deepEqual = function (object1, object2) {
         var isObject = function (object) {return (object != null && typeof object === 'object');};
+	    if (!isObject(object1) || !isObject(object2)) {return false;}
         var keys1 = Object.keys(object1);
         var keys2 = Object.keys(object2);
 
