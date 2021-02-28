@@ -620,7 +620,7 @@ window.addEventListener("load",gm.onDocLoad);
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				// && this.status == 200
-				var r = {status: null,http_code: this.status,res: null,error_level: 0,error: null};
+				var r = {status: null,redirected: (this.responseURL !== url),http_code: this.status,res: null,error_level: 0,error: null};
 				r.headers = this.getAllResponseHeaders();
 				r.headers = {};
 				var hs = this.getAllResponseHeaders().trim().split(/[\r\n]+/);
