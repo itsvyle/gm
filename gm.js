@@ -436,7 +436,7 @@ window.addEventListener("load",gm.onDocLoad);
 					});
 				}
 				if (!flag || typeof(flag) !== "string") {throw "'flag' must be a string";}
-				if (!flag in this.flag_values) {return false;}
+				if (!(flag in this.flag_values)) {return false;}
 				this.flags |= this.flag_values[flag];
 				return true;
 			};
@@ -449,7 +449,7 @@ window.addEventListener("load",gm.onDocLoad);
 					});
 				}
 				if (!flag || typeof(flag) !== "string") {throw "'flag' must be a string";}
-				if (!flag in this.flag_values) {return false;}
+				if (!(flag in this.flag_values)) {return false;}
 				flag = this.flag_values[flag];
 				return ((this.flags & flag) === flag);
 			};
@@ -462,7 +462,7 @@ window.addEventListener("load",gm.onDocLoad);
 					});
 				}
 				if (!flag || typeof(flag) !== "string") {throw "'flag' must be a string";}
-				if (!flag in this.flag_values) {return false;}
+				if (!(flag in this.flag_values)) {return false;}
 				flag = this.flag_values[flag];
 				this.flags &= ~flag;
 				return true;
