@@ -253,6 +253,7 @@ html.b,html.b body,html.b div,html.b h1,html.b h2,html.b h3,html.b h4,html.b h5,
     width: 0%;
     text-align: center;
     font-size: 25px;
+	line-height: 40px;
 }
 
 #base {
