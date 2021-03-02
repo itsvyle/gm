@@ -26,7 +26,6 @@
 		});
 	  });
 	})([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
-
     if (!Date.prototype.toISOString) {
         (function() {
 
@@ -51,6 +50,30 @@
         })();
     }
 
+    // Polyfill for Date.parse
+    Date.parse = Date.parse || function(
+        a // ISO Date string
+    ){
+        // turn into array, cutting the first character of the Month
+        a = a.split(/\W\D?/);
+        // create a new date object
+        return new Date(
+            // year
+            a[3],
+            // month (starting with zero) 
+            // we got only the second and third character, so we find it in a string
+            // Jan => an => 0, Feb => eb => 1, ...
+            "anebarprayunulugepctovec".search(a[1]) / 2,
+            // day
+            a[2],
+            // hour
+            a[4],
+            // minute
+            a[5],
+            // second
+            a[6]
+        );
+    };
     // =========================== OBJECT.ASSIGN() ===========================
     if (typeof(Object.assign) !== 'function') {
     // Must be writable: true, enumerable: false, configurable: true
@@ -380,7 +403,7 @@ var gm = {
             return alert("Error" + name + ": tried var is not a function");
         }
         try {
-            f();
+            return f();
         } catch (err) {
             alert("Error" + name + ": " + err);
         }
