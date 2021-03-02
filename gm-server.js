@@ -42,7 +42,6 @@ function Session(url_,thread_,interval_,createArguments_) {
     this.onOpen = function () {};
     this.onClose = function () {};
     this.isWS = (!this.constructor.hasWS) ? false : gm.supportWS();
-    alert(this.isWS);
     this.ws = null;
     this.sessionData = null;
 
