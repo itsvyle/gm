@@ -16,8 +16,7 @@ function Session(url_,thread_,interval_,createArguments_) {
         createArguments_ = args_;
         this.createQuery = gm.buildQuery(args_);
         return this;
-    }
-
+    };
     this.thread = thread_;
     this.url = url_;
     this.id = null;
@@ -42,8 +41,8 @@ function Session(url_,thread_,interval_,createArguments_) {
     this.onMessage = function () {};
     this.onOpen = function () {};
     this.onClose = function () {};
-
-    this.isWS = gm.supportWS();
+    this.isWS = (!this.constructor.hasWS) ? false : gm.supportWS();
+    alert(this.isWS);
     this.ws = null;
     this.sessionData = null;
 
@@ -318,6 +317,7 @@ function Session(url_,thread_,interval_,createArguments_) {
         } catch (err) {}
     };
 }
+    Session.hasWS = true;
     var Server = {
         Session: Session  
     };
