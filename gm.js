@@ -539,6 +539,7 @@ window.addEventListener("load",gm.onDocLoad);
 				return this.cname + "_v" + this.version;
 			};
 			fl.save = function (expiresdays) {
+                if (expiresdays === undefined) {expiresdays = 365;}
 				var c = this.cookieName();
 				return gm.setCookie(c,this.toString(),expiresdays);
 			};
