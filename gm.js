@@ -702,7 +702,7 @@ window.addEventListener("load",gm.onDocLoad);
 					r.status = 0;
 					r.error_level = 1;
 					r.error = "Error making request(" + String(this.status) + ": " + this.responseText + ")";
-                    if (opts.json == true) {r.res = gm.JSONParse(this.responseText);} else {
+                    if (opts.json == true) {r.res = gm.JSONParse(this.responseText);if (r.res === null) {r.res = this.responseText;}} else {
                         r.res = this.responseText;
                     }
 				} else {
