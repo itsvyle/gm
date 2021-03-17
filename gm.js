@@ -1337,8 +1337,9 @@ window.addEventListener("load",gm.onDocLoad);
                 });
             } else {
                 var index = this.classes.indexOf(c);
-                if (index > -1) {
+                while (index > -1) {
                     this.classes.splice(index, 1);
+                    index = this.classes.indexOf(c);
                 }
             }
             return this.set();
