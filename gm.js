@@ -1283,6 +1283,74 @@ window.addEventListener("load",gm.onDocLoad);
 			return String(milliseconds) + "ms";	
 		}
 	};
+
+    // =========================== CLASSES ===========================
+    gm.Classes = function (node_) {
+        this.node = node_;
+        this.classes = [];
+        
+        this.fullText = function () {
+            var node = this.node;
+            return (("className" in node) ? node.className : node.getAttribute("class")) || "";
+        };
+
+        this.get = function (t) {
+            if (!t) {t = this.fullText();}
+            this.classes = t.split(" ");
+            return this;
+        };
+
+        this.set = function () {
+            var node = this.node;
+            this.classes = this.classes.filter(function (c) {
+                return (c && typeof(c) == "string");
+            });
+            ("className" in node) ? node.className = this.toString() : node.setAttribute("class",this.toString());
+            return this;
+        };
+
+        this.toString = function () {
+            return this.classes.join(" ");
+        };
+
+        this.has = function (c) {
+            return this.classes.includes(c);
+        };
+
+        this.add = function (c) {
+            if (Array.isArray(c)) {
+                var par = this;
+                c.forEach(function (c_) {
+                    par.add(c_);
+                });
+            } else {
+                this.classes.push(c);
+            }
+            return this.set();
+        };
+
+        this.remove = function (c) {
+            if (Array.isArray(c)) {
+                var par = this;
+                c.forEach(function (c_) {
+                    par.remove(c_);
+                });
+            } else {
+                var index = this.classes.indexOf(c);
+                if (index > -1) {
+                    this.classes.splice(index, 1);
+                }
+            }
+            return this.set();
+        };
+
+        this.clear = function () {
+            this.classes = [];
+            return this.set();
+        };
+        
+    };
+    gm.classes = function (node) {return (new gm.Classes(node)).get();};
     
 	if (window._gm_assets) {
 		for (var i = 0; i < window._gm_assets.length; i++) {
